@@ -377,13 +377,12 @@ class MauritanieGaussianFilterTest(ScriptedLoadableModuleTest):
 
         logic = MauritanieGaussianFilterLogic()
         
-        filtered_image = logic.logic.apply_filter(inputVolume)
+        filtered_image = logic.apply_filter(inputVolume)
             
         # Update the new volume node with the filtered image data
         slicer.util.updateVolumeFromArray(outputVolume, filtered_image)
 
         # Notify Slicer that the volume data has changed
         outputVolume.GetImageData().Modified()
-
 
         self.delayDisplay('Test passed')
