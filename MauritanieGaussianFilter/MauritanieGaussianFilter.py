@@ -254,12 +254,17 @@ class MauritanieGaussianFilterWidget(ScriptedLoadableModuleWidget, VTKObservatio
             if not inputVolumeNode or not outputVolumeNode:
                 slicer.util.errorDisplay("Invalid input or output volume nodes.")
                 return
+            
+            print(f"inputVolumeNode : {inputVolumeNode}")
 
             filtered_image = self.logic.apply_filter(inputVolumeNode)
 
             # # Use slicer.util.arrayFromVolume, not arrayFromVolumeNode
             # filtered_array = slicer.util.arrayFromVolume(outputVolumeNode)
             # filtered_array[:] = filtered_image  # Update the data
+            
+            
+            
             
             # Update the new volume node with the filtered image data
             slicer.util.updateVolumeFromArray(outputVolumeNode, filtered_image)
@@ -309,6 +314,7 @@ class MauritanieGaussianFilterLogic(ScriptedLoadableModuleLogic):
 
         # Get volume data
         input_data = slicer.util.array(inputVolume.GetID())
+        print(f"input_data : {input_data}")
 
         # Convert to SimpleITK image
         sitk_image = sitk.GetImageFromArray(input_data)
